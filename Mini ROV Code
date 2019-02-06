@@ -1,0 +1,35 @@
+int motor6Direction;
+
+
+
+void setUp(){
+pinMode(motor6DIR, OUTPUT);
+}
+void loop{
+//LEFT JOYSTICK
+  if(serialVal <= 28 && serialVal >= 0) {               //Between values 0 and 28
+    
+    motor6Direction = dirBoolFB1;
+    digitalWrite(motor1DIR, motor6Direction);
+    motor6PWMVal = abs((serialVal - 32) * motorCtrlSpd);
+    analogWrite(motor1PWM, motor6PWMVal);
+    } else if(serialVal < 32) {                           //Between values 29 and 32
+    
+    analogWrite(motor1PWM, 0);
+    
+  } else if(serialVal <= 64) {                          //Between values 33 and 64
+    
+    motor6Direction = dirBoolFB2;
+    digitalWrite(motor1DIR, motor6Direction);
+    motor6PWMVal = (serialVal - 32) * motorCtrlSpd;
+    analogWrite(motor6PWM, motor6PWMVal);
+}
+switch(serialVal) {
+ //NORTH
+      case 205:
+      
+        motor6DIR = 35;
+        motorPWM = 33;
+        break;
+    }
+        
